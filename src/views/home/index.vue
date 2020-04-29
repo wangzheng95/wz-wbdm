@@ -14,11 +14,11 @@
       </div>
     </div>
     <div class="swiper-bar">
-      <swiper class="my-swiper" :autoplay="2000" :loop="true">
-        <swiperItem>
-          <img src="../../assets/icon/01-banner.png" alt="" />
+      <swiper class="my-swiper" :autoplay="2000" :loop="true"  v-if='bannerList.length > 0'>
+        <swiperItem v-for='item in bannerList' :key='item.info_id'>
+          <img :src="item.image_url" alt="" />
         </swiperItem>
-        <swiperItem>
+        <!-- <swiperItem>
           <img src="../../assets/icon/02-banner.png" alt="" />
         </swiperItem>
         <swiperItem>
@@ -26,21 +26,38 @@
         </swiperItem>
         <swiperItem>
           <img src="../../assets/icon/04-banner.png" alt="" />
-        </swiperItem>
+        </swiperItem> -->
       </swiper>
     </div>
   </div>
 </template>
 
 <script>
-// import swiper from '@/components/swiper/swiper.vue'
-// import swiper from '@/components/swiper/swiperItem.vue'
 import { swiper, swiperItem } from '@/components/swiper'
+import { getBanner } from '@/api/cartoon'
 export default {
   name: 'home',
   components: {
     swiper,
     swiperItem
+  },
+  data () {
+    return {
+      bannerList: []
+    }
+  },
+  created () {
+    getBanner().then(res => {
+      // console.log(res)
+      if (res.code === 1) {
+        this.bannerList = res.data.h5_recommend_male_rotation_map
+      } else {
+        alert(res.message)
+      }
+    }).catch(err => {
+      console.log(err)
+      alert('网络异常，请稍后重试')
+    })
   }
 }
 </script>
