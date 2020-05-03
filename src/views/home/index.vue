@@ -30,58 +30,29 @@
           </swiperItem>
         </swiper>
       </div>
-
       <!-- 分类导航 -->
-      <div class="home_menu">
-        <div class="home_menu_item">
-          <img
-            src="//img.manhua.weibo.com/static/b/vcomic-h5/dist/img/daypub.7d71503a.png"
-            alt=""
-          />
-          <p>放送表</p>
-        </div>
-        <div class="home_menu_item">
-          <img
-            src="//img.manhua.weibo.com/static/b/vcomic-h5/dist/img/catelog.3cfb4bb6.png"
-            alt=""
-          />
-          <p>分类</p>
-        </div>
-        <div class="home_menu_item">
-          <img
-            src="//img.manhua.weibo.com/static/b/vcomic-h5/dist/img/rank.bfd0ebb0.png"
-            alt=""
-          />
-          <p>榜单</p>
-        </div>
-        <div class="home_menu_item">
-          <img
-            src="//img.manhua.weibo.com/static/b/vcomic-h5/dist/img/ending.932e7864.png"
-            alt=""
-          />
-          <p>完结</p>
-        </div>
-      </div>
-
+      <indexNav></indexNav>
       <!-- 动漫分类 -->
       <div>
         <!-- 精品佳作 -->
-        <div class="home-recommend-block" >
-          <div class="home-recommend-header">
-            <div class="home-recommend-title">精品佳作</div>
-            <div class="home-recommend-more">更多&gt;</div>
-          </div>
-
+        <div class="home-recommend-block">
+          <classifyHeader></classifyHeader>
           <div>
             <div class="home-recommend-comics">
-              <div class="home-recommend-comic" v-for='item in fineWorksLit' :key='item.extra_comic_id'>
+              <div
+                class="home-recommend-comic"
+                v-for="item in fineWorksLit"
+                :key="item.extra_comic_id"
+              >
                 <div class="comic-cover-container">
                   <div class="comic-cover">
                     <img :src="item.image_ext_url" alt="" />
                   </div>
                   <div class="comic-cover-info">
-                    <div class="comic-cover-title">{{item.extra.name}}</div>
-                    <div class="comic-cover-desc">{{item.extra.watching_focus}}</div>
+                    <div class="comic-cover-title">{{ item.extra.name }}</div>
+                    <div class="comic-cover-desc">
+                      {{ item.extra.watching_focus }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -90,21 +61,24 @@
         </div>
         <!-- 人气作品 -->
         <div class="home-recommend-block">
-          <div class="home-recommend-header">
-            <div class="home-recommend-title">人气作品</div>
-            <div class="home-recommend-more">更多&gt;</div>
-          </div>
+          <classifyHeader></classifyHeader>
 
           <div>
             <div class="home-recommend-comics">
-              <div class="home-recommend-comic" v-for='item in popularList' :key='item.extra_comic_id'>
+              <div
+                class="home-recommend-comic"
+                v-for="item in popularList"
+                :key="item.extra_comic_id"
+              >
                 <div class="comic-cover-container">
                   <div class="comic-cover">
                     <img :src="item.image_ext_url" alt="" />
                   </div>
                   <div class="comic-cover-info">
-                    <div class="comic-cover-title">{{item.extra.name}}</div>
-                    <div class="comic-cover-desc">{{item.extra.watching_focus}}</div>
+                    <div class="comic-cover-title">{{ item.extra.name }}</div>
+                    <div class="comic-cover-desc">
+                      {{ item.extra.watching_focus }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -113,29 +87,30 @@
         </div>
         <!-- 最新上架 -->
         <div class="home-recommend-block2">
-          <div class="home-recommend-header">
-            <div class="home-recommend-title">最新上架</div>
-            <div class="home-recommend-more">更多&gt;</div>
-          </div>
+          <classifyHeader></classifyHeader>
 
           <div>
             <div class="home-recommend-comics">
-              <div class="home-recommend-comic" v-for='item in newArrivalList' :key='item.extra_comic_id'>
+              <div
+                class="home-recommend-comic"
+                v-for="item in newArrivalList"
+                :key="item.extra_comic_id"
+              >
                 <div class="comic-cover-container">
                   <div class="comic-cover">
                     <img :src="item.image_ext_url" alt="" />
                   </div>
                   <div class="comic-cover-info">
                     <div class="comic-cover-title">
-                      {{item.extra.name}}
+                      {{ item.extra.name }}
                     </div>
                     <div class="comic-cover-classify">
                       <img src="" alt="" />
-                        暂无分类
+                      暂无分类
                     </div>
                     <div class="comic-cover-author">
                       <img src="" />
-                      {{item.extra.sina_nickname}}
+                      {{ item.extra.sina_nickname }}
                     </div>
                   </div>
                 </div>
@@ -145,21 +120,24 @@
         </div>
         <!-- 热门连载 -->
         <div class="home-recommend-block">
-          <div class="home-recommend-header">
-            <div class="home-recommend-title">热门连载</div>
-            <div class="home-recommend-more">更多&gt;</div>
-          </div>
+          <classifyHeader></classifyHeader>
 
           <div>
             <div class="home-recommend-comics">
-              <div class="home-recommend-comic"  v-for='item in hotList' :key='item.extra_comic_id'>
+              <div
+                class="home-recommend-comic"
+                v-for="item in hotList"
+                :key="item.extra_comic_id"
+              >
                 <div class="comic-cover-container">
                   <div class="comic-cover">
                     <img :src="item.image_ext_url" alt="" />
                   </div>
                   <div class="comic-cover-info">
-                    <div class="comic-cover-title">{{item.extra.name}}</div>
-                    <div class="comic-cover-desc">{{item.extra.watching_focus}}</div>
+                    <div class="comic-cover-title">{{ item.extra.name }}</div>
+                    <div class="comic-cover-desc">
+                      {{ item.extra.watching_focus }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -168,21 +146,24 @@
         </div>
         <!-- 小编推荐 -->
         <div class="home-recommend-block">
-          <div class="home-recommend-header">
-            <div class="home-recommend-title">小编推荐</div>
-            <div class="home-recommend-more">更多&gt;</div>
-          </div>
+          <classifyHeader></classifyHeader>
 
           <div>
             <div class="home-recommend-comics">
-              <div class="home-recommend-comic" v-for='item in xiaobianList' :key='item.extra_comic_id'>
+              <div
+                class="home-recommend-comic"
+                v-for="item in xiaobianList"
+                :key="item.extra_comic_id"
+              >
                 <div class="comic-cover-container">
                   <div class="comic-cover">
                     <img :src="item.image_ext_url" alt="" />
                   </div>
                   <div class="comic-cover-info">
-                    <div class="comic-cover-title">{{item.extra.name}}</div>
-                    <div class="comic-cover-desc">{{item.extra.watching_focus}}</div>
+                    <div class="comic-cover-title">{{ item.extra.name }}</div>
+                    <div class="comic-cover-desc">
+                      {{ item.extra.watching_focus }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -191,21 +172,24 @@
         </div>
         <!-- 本周推荐 -->
         <div class="home-recommend-block3">
-          <div class="home-recommend-header">
-            <div class="home-recommend-title">本周推荐</div>
-            <div class="home-recommend-more">更多&gt;</div>
-          </div>
+          <classifyHeader></classifyHeader>
 
           <div>
             <div class="home-recommend-comics">
-              <div class="home-recommend-comic" v-for='item in weekList' :key='item.extra_comic_id'>
+              <div
+                class="home-recommend-comic"
+                v-for="item in weekList"
+                :key="item.extra_comic_id"
+              >
                 <div class="comic-cover-container">
                   <div class="comic-cover">
-                   <img :src="item.image_ext_url" alt="" />
+                    <img :src="item.image_ext_url" alt="" />
                   </div>
                   <div class="comic-cover-info">
-                   <div class="comic-cover-title">{{item.extra.name}}</div>
-                    <div class="comic-cover-desc">{{item.extra.watching_focus}}</div>
+                    <div class="comic-cover-title">{{ item.extra.name }}</div>
+                    <div class="comic-cover-desc">
+                      {{ item.extra.watching_focus }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -220,11 +204,15 @@
 <script>
 import { swiper, swiperItem } from '@/components/swiper'
 import { getBanner } from '@/api/cartoon'
+import classifyHeader from './components/classifyHeader'
+import indexNav from './components/indexNav'
 export default {
   name: 'home',
   components: {
     swiper,
-    swiperItem
+    swiperItem,
+    indexNav,
+    classifyHeader
   },
   data () {
     return {
@@ -237,26 +225,31 @@ export default {
       weekList: []
     }
   },
+  methods: {
+    getBanner () {
+      getBanner()
+        .then(res => {
+          // console.log(res)
+          if (res.code === 1) {
+            this.bannerList = res.data.h5_recommend_male_rotation_map
+            this.fineWorksLit = res.data.h5_recommend_male_fine_works.splice(0, 3)
+            this.popularList = res.data.h5_recommend_male_popular_works.splice(0, 4)
+            this.newArrivalList = res.data.h5_recommend_male_new_arrival.splice(0, 3)
+            this.hotList = res.data.h5_recommend_male_hot_serial.splice(0, 2)
+            this.xiaobianList = res.data.h5_recommend_male_xiaobian_recommend.splice(0, 3)
+            this.weekList = res.data.h5_recommend_male_week_recommend.splice(0, 3)
+          } else {
+            alert(res.message)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          alert('网络异常，请稍后重试')
+        })
+    }
+  },
   created () {
-    getBanner()
-      .then(res => {
-        // console.log(res)
-        if (res.code === 1) {
-          this.bannerList = res.data.h5_recommend_male_rotation_map
-          this.fineWorksLit = res.data.h5_recommend_male_fine_works.splice(0, 3)
-          this.popularList = res.data.h5_recommend_male_popular_works.splice(0, 4)
-          this.newArrivalList = res.data.h5_recommend_male_new_arrival.splice(0, 3)
-          this.hotList = res.data.h5_recommend_male_hot_serial.splice(0, 2)
-          this.xiaobianList = res.data.h5_recommend_male_xiaobian_recommend.splice(0, 3)
-          this.weekList = res.data.h5_recommend_male_week_recommend.splice(0, 3)
-        } else {
-          alert(res.message)
-        }
-      })
-      .catch(err => {
-        console.log(err)
-        alert('网络异常，请稍后重试')
-      })
+    this.getBanner()
   }
 }
 </script>
@@ -315,27 +308,6 @@ export default {
       }
     }
   }
-  .home_menu {
-    padding: 19px;
-    background: #fff;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    .home_menu_item {
-      width: 60px;
-      height: 88px;
-      img {
-        width: 60px;
-        height: 60px;
-      }
-      p {
-        font-size: 14px;
-        color: #333;
-        text-align: center;
-      }
-    }
-  }
   // 精品佳作样式
   .home-recommend-block {
     width: 100%;
@@ -366,7 +338,7 @@ export default {
         content: "";
         width: 22px;
         height: 22px;
-        background: url(../../assets/icon/ink.png);
+        background: url(~@/assets/icon/ink.png);
         background-size: cover;
         background-position: 50%;
         background-repeat: no-repeat;
@@ -399,16 +371,16 @@ export default {
           font-size: 14px;
           color: #666;
           overflow: hidden;
-          text-overflow:ellipsis;//这是让文本溢出后，显示成省略号。
-          white-space:nowrap;//禁止自动换行
+          text-overflow: ellipsis; //这是让文本溢出后，显示成省略号。
+          white-space: nowrap; //禁止自动换行
         }
         .comic-cover-desc {
           font-size: 12px;
           color: #999;
           margin: 0 0 6px;
           overflow: hidden;
-          text-overflow:ellipsis;//这是让文本溢出后，显示成省略号。
-          white-space:nowrap;//禁止自动换行
+          text-overflow: ellipsis; //这是让文本溢出后，显示成省略号。
+          white-space: nowrap; //禁止自动换行
         }
       }
       .home-recommend-comic {
@@ -489,7 +461,7 @@ export default {
         content: "";
         width: 22px;
         height: 22px;
-        background: url(../../assets/icon/ink.png);
+        background: url(~@/assets/icon/ink.png);
         background-size: cover;
         background-position: 50%;
         background-repeat: no-repeat;
@@ -541,8 +513,8 @@ export default {
               margin: 4px 0 0;
               padding: 0 0 8px;
               overflow: hidden;
-              text-overflow:ellipsis;//这是让文本溢出后，显示成省略号。
-              white-space:nowrap;//禁止自动换行
+              text-overflow: ellipsis; //这是让文本溢出后，显示成省略号。
+              white-space: nowrap; //禁止自动换行
             }
             .comic-cover-classify {
               color: #000;
@@ -558,7 +530,7 @@ export default {
               content: "";
               width: 16px;
               height: 16px;
-              background: url(../../assets/icon/classify.png);
+              background: url(~@/assets/icon/classify.png);
               background-size: cover;
               background-position: 50%;
               background-repeat: no-repeat;
@@ -576,7 +548,7 @@ export default {
               content: "";
               width: 16px;
               height: 16px;
-              background: url(../../assets/icon/ink.png);
+              background: url(~@/assets/icon/ink.png);
               background-size: cover;
               background-position: 50%;
               background-repeat: no-repeat;
@@ -636,7 +608,7 @@ export default {
         content: "";
         width: 22px;
         height: 22px;
-        background: url(../../assets/icon/ink.png);
+        background: url(~@/assets/icon/ink.png);
         background-size: cover;
         background-position: 50%;
         background-repeat: no-repeat;
@@ -662,7 +634,7 @@ export default {
       .home-recommend-comic {
         width: 108px;
         height: 200px;
-        margin:0 0 8px 6px;
+        margin: 0 0 8px 6px;
         display: flex;
         flex-direction: column;
         .comic-cover-container {
@@ -672,7 +644,7 @@ export default {
             width: 109px;
             height: 150px;
             border-radius: 5px;
-            overflow:hidden;
+            overflow: hidden;
             img {
               width: 109px;
               height: 150px;
@@ -689,15 +661,15 @@ export default {
             font-size: 14px;
             color: #666;
             overflow: hidden;
-            text-overflow:ellipsis;//这是让文本溢出后，显示成省略号。
-            white-space:nowrap;//禁止自动换行
+            text-overflow: ellipsis; //这是让文本溢出后，显示成省略号。
+            white-space: nowrap; //禁止自动换行
           }
           .comic-cover-desc {
             font-size: 12px;
             color: #999;
             overflow: hidden;
-            text-overflow:ellipsis;//这是让文本溢出后，显示成省略号。
-            white-space:nowrap;//禁止自动换行
+            text-overflow: ellipsis; //这是让文本溢出后，显示成省略号。
+            white-space: nowrap; //禁止自动换行
           }
         }
       }
