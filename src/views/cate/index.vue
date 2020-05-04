@@ -99,8 +99,8 @@ export default {
           alert('网络异常，请稍后重试')
         })
     },
-    b () {
-      getBottom()
+    b (cateIndex, payIndex, endIndex) {
+      getBottom(cateIndex, payIndex, endIndex)
         .then(res => {
           // console.log(res)
           if (res.code === 1) {
@@ -116,15 +116,17 @@ export default {
     },
     handleClick1 (payload, type, index) {
       this.cateIndex = payload.cate_id
-      // console.log(payload)
-      this.b.cate_id = payload.cate_id
+      // console.log(this.cateIndex)
+      this.b(this.cateIndex, this.endIndex, this.payIndex)
     },
     handleClick2 (payload, type, index) {
       this.endIndex = payload.end_status
       // console.log(payload)
+      this.b(this.cateIndex, this.endIndex, this.payIndex)
     },
     handleClick3 (payload, type, index) {
       this.payIndex = payload.comic_pay_status
+      this.b(this.cateIndex, this.endIndex, this.payIndex)
     }
   },
   async created () {
