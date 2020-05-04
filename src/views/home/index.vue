@@ -36,7 +36,12 @@
       <div>
         <!-- 精品佳作 -->
         <div class="home-recommend-block">
-          <classifyHeader></classifyHeader>
+          <div class="home-recommend-header">
+            <div class="home-recommend-title">精品佳作</div>
+            <router-link to='/fine'>
+              <div class="home-recommend-more">更多&gt;</div>
+            </router-link>
+          </div>
           <div>
             <div class="home-recommend-comics">
               <div
@@ -61,7 +66,12 @@
         </div>
         <!-- 人气作品 -->
         <div class="home-recommend-block">
-          <classifyHeader></classifyHeader>
+          <div class="home-recommend-header">
+            <div class="home-recommend-title">人气作品</div>
+            <router-link to='/popular'>
+              <div class="home-recommend-more">更多&gt;</div>
+            </router-link>
+          </div>
 
           <div>
             <div class="home-recommend-comics">
@@ -87,7 +97,12 @@
         </div>
         <!-- 最新上架 -->
         <div class="home-recommend-block2">
-          <classifyHeader></classifyHeader>
+          <div class="home-recommend-header">
+            <div class="home-recommend-title">最新上架</div>
+            <router-link to='/newA'>
+              <div class="home-recommend-more">更多&gt;</div>
+            </router-link>
+          </div>
 
           <div>
             <div class="home-recommend-comics">
@@ -120,7 +135,12 @@
         </div>
         <!-- 热门连载 -->
         <div class="home-recommend-block">
-          <classifyHeader></classifyHeader>
+          <div class="home-recommend-header">
+            <div class="home-recommend-title">热门连载</div>
+            <router-link to='/hot'>
+              <div class="home-recommend-more">更多&gt;</div>
+            </router-link>
+          </div>
 
           <div>
             <div class="home-recommend-comics">
@@ -146,7 +166,12 @@
         </div>
         <!-- 小编推荐 -->
         <div class="home-recommend-block">
-          <classifyHeader></classifyHeader>
+          <div class="home-recommend-header">
+            <div class="home-recommend-title">小编推荐</div>
+            <router-link to='/xiaobian'>
+              <div class="home-recommend-more">更多&gt;</div>
+            </router-link>
+          </div>
 
           <div>
             <div class="home-recommend-comics">
@@ -172,7 +197,12 @@
         </div>
         <!-- 本周推荐 -->
         <div class="home-recommend-block3">
-          <classifyHeader></classifyHeader>
+          <div class="home-recommend-header">
+            <div class="home-recommend-title">本周推荐</div>
+            <router-link to='/week'>
+              <div class="home-recommend-more">更多&gt;</div>
+            </router-link>
+          </div>
 
           <div>
             <div class="home-recommend-comics">
@@ -204,15 +234,13 @@
 <script>
 import { swiper, swiperItem } from '@/components/swiper'
 import { getBanner } from '@/api/cartoon'
-import classifyHeader from './components/classifyHeader'
 import indexNav from './components/indexNav'
 export default {
   name: 'home',
   components: {
     swiper,
     swiperItem,
-    indexNav,
-    classifyHeader
+    indexNav
   },
   data () {
     return {
@@ -229,15 +257,29 @@ export default {
     getBanner () {
       getBanner()
         .then(res => {
-          // console.log(res)
           if (res.code === 1) {
             this.bannerList = res.data.h5_recommend_male_rotation_map
-            this.fineWorksLit = res.data.h5_recommend_male_fine_works.splice(0, 3)
-            this.popularList = res.data.h5_recommend_male_popular_works.splice(0, 4)
-            this.newArrivalList = res.data.h5_recommend_male_new_arrival.splice(0, 3)
+            this.fineWorksLit = res.data.h5_recommend_male_fine_works.splice(
+              0,
+              3
+            )
+            this.popularList = res.data.h5_recommend_male_popular_works.splice(
+              0,
+              4
+            )
+            this.newArrivalList = res.data.h5_recommend_male_new_arrival.splice(
+              0,
+              3
+            )
             this.hotList = res.data.h5_recommend_male_hot_serial.splice(0, 2)
-            this.xiaobianList = res.data.h5_recommend_male_xiaobian_recommend.splice(0, 3)
-            this.weekList = res.data.h5_recommend_male_week_recommend.splice(0, 3)
+            this.xiaobianList = res.data.h5_recommend_male_xiaobian_recommend.splice(
+              0,
+              3
+            )
+            this.weekList = res.data.h5_recommend_male_week_recommend.splice(
+              0,
+              3
+            )
           } else {
             alert(res.message)
           }
@@ -306,6 +348,48 @@ export default {
         width: 100%;
         height: 100%;
       }
+    }
+  }
+  .home-recommend-header {
+    padding: 0 16px;
+    height: 44px;
+    // margin-top: 8px;
+    line-height: 44px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    // width: 100%;
+    background: #fff;
+    .home-recommend-title {
+      font-size: 18px;
+      color: #666;
+      padding-left: 26px;
+      position: relative;
+    }
+
+    .home-recommend-title:before {
+      position: absolute;
+      top: 11px;
+      left: 0;
+      content: "";
+      width: 22px;
+      height: 22px;
+      background: url(~@/assets/icon/ink.png);
+      background-size: cover;
+      background-position: 50%;
+      background-repeat: no-repeat;
+    }
+
+    .home-recommend-more {
+      font-size: 12px;
+      color: #fff;
+      width: 42px;
+      height: 20px;
+      text-align: center;
+      line-height: 22px;
+      background: #4a90e2;
+      border-radius: 10px;
     }
   }
   // 精品佳作样式

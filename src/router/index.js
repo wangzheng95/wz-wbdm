@@ -8,6 +8,12 @@ import end from '../views/end'
 import mine from '../views/mine'
 import rank from '../views/rank'
 import search from '../views/search'
+import fine from '../views/more/fine'
+import hot from '../views/more/hot'
+import popular from '../views/more/popular'
+import week from '../views/more/week'
+import xiaobian from '../views/more/xiaobian'
+import newA from '../views/more/newA'
 
 Vue.use(VueRouter)
 
@@ -40,6 +46,30 @@ const router = new VueRouter({
     {
       path: '/search',
       component: search
+    },
+    {
+      path: '/fine',
+      component: fine
+    },
+    {
+      path: '/hot',
+      component: hot
+    },
+    {
+      path: '/popular',
+      component: popular
+    },
+    {
+      path: '/week',
+      component: week
+    },
+    {
+      path: '/newA',
+      component: newA
+    },
+    {
+      path: '/xiaobian',
+      component: xiaobian
     },
     {
       path: '/',
