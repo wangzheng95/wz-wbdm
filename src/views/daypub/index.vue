@@ -1,12 +1,16 @@
 <template>
   <div class="page-daypub">
-     <h1>放送表</h1>
+     <normalHeader></normalHeader>
   </div>
 </template>
 
 <script>
+import normalHeader from '@/components/normalHeader'
 export default {
-  name: 'daypub'
+  name: 'daypub',
+  components: {
+    normalHeader
+  }
 }
 </script>
 
