@@ -1,8 +1,12 @@
 <template>
   <div class="more-week">
-    <normalHeader :title='"小编推荐"'></normalHeader>
+    <normalHeader :title="'小编推荐'"></normalHeader>
     <div class="main">
-      <more v-for='item in xiaobianList' :key="item.extra_comic_id" :info='item'></more>
+      <more
+        v-for="item in xiaobianList"
+        :key="item.extra_comic_id"
+        :info="item"
+      ></more>
     </div>
   </div>
 </template>
@@ -24,18 +28,9 @@ export default {
   },
   methods: {
     getBanner () {
-      getBanner()
-        .then(res => {
-          if (res.code === 1) {
-            this.xiaobianList = res.data.h5_recommend_male_xiaobian_recommend
-          } else {
-            alert(res.message)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          alert('网络异常，请稍后重试')
-        })
+      getBanner().then(res => {
+        this.xiaobianList = res.data.h5_recommend_male_xiaobian_recommend
+      })
     }
   },
   created () {
@@ -44,7 +39,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .more-fine {
   display: flex;
   flex-direction: column;

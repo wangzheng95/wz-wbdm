@@ -5,13 +5,12 @@
     <div class="rank_list_title">
       <div
         class="list_title_item"
-        :class="{'list_title_color' : item.index === clickIndex}"
+        :class="{ list_title_color: item.index === clickIndex }"
         @click="handleClick(item.index)"
-        v-for='item in title'
-        :key='item.name'
+        v-for="item in title"
+        :key="item.name"
       >
-        <!-- list_title_color -->
-        {{item.name}}
+        {{ item.name }}
       </div>
     </div>
     <div class="main">
@@ -49,55 +48,40 @@ export default {
   data () {
     return {
       rankList: [],
-      title: [{ name: '阅读榜', index: 1 }, { name: '新作榜', index: 2 }, { name: '综合榜', index: 3 }],
+      title: [
+        { name: '阅读榜', index: 1 },
+        { name: '新作榜', index: 2 },
+        { name: '综合榜', index: 3 }
+      ],
       clickIndex: 1
     }
   },
   methods: {
     a () {
-      getRank1()
-        .then(res => {
-          if (res.code === 1) {
-            // console.log(res.data.week)
-            this.rankList = res.data.week
-          } else {
-            alert(res.message)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          alert('网络异常，请稍后重试')
-        })
+      getRank1().then(res => {
+        if (res.code === 1) {
+          // console.log(res.data.week)
+          this.rankList = res.data.week
+        } else {
+          alert(res.message)
+        }
+      })
     },
     b () {
-      getRank2()
-        .then(res => {
-          if (res.code === 1) {
-            // console.log(res.data.week)
-            this.rankList = res.data.week
-          } else {
-            alert(res.message)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          alert('网络异常，请稍后重试')
-        })
+      getRank2().then(res => {
+        if (res.code === 1) {
+          // console.log(res.data.week)
+          this.rankList = res.data.week
+        } else {
+          alert(res.message)
+        }
+      })
     },
     c () {
-      getRank3()
-        .then(res => {
-          if (res.code === 1) {
-            // console.log(res.data.week)
-            this.rankList = res.data.week
-          } else {
-            alert(res.message)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          alert('网络异常，请稍后重试')
-        })
+      getRank3().then(res => {
+        // console.log(res.data.week)
+        this.rankList = res.data.week
+      })
     },
     handleClick (index) {
       // console.log(index)

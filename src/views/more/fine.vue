@@ -1,8 +1,12 @@
 <template>
   <div class="more-fine">
-    <normalHeader :title='"精品佳作"'></normalHeader>
+    <normalHeader :title="'精品佳作'"></normalHeader>
     <div class="main">
-      <more v-for='item in fineWorksLit' :key="item.extra_comic_id" :info='item'></more>
+      <more
+        v-for="item in fineWorksLit"
+        :key="item.extra_comic_id"
+        :info="item"
+      ></more>
     </div>
   </div>
 </template>
@@ -24,18 +28,9 @@ export default {
   },
   methods: {
     getBanner () {
-      getBanner()
-        .then(res => {
-          if (res.code === 1) {
-            this.fineWorksLit = res.data.h5_recommend_male_fine_works
-          } else {
-            alert(res.message)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          alert('网络异常，请稍后重试')
-        })
+      getBanner().then(res => {
+        this.fineWorksLit = res.data.h5_recommend_male_fine_works
+      })
     }
   },
   created () {
@@ -44,7 +39,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .more-fine {
   display: flex;
   flex-direction: column;

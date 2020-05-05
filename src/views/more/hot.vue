@@ -1,8 +1,12 @@
 <template>
   <div class="more-hot">
-    <normalHeader :title='"热门连载"'></normalHeader>
+    <normalHeader :title="'热门连载'"></normalHeader>
     <div class="main">
-      <more v-for='item in hotList' :key="item.extra_comic_id" :info='item'></more>
+      <more
+        v-for="item in hotList"
+        :key="item.extra_comic_id"
+        :info="item"
+      ></more>
     </div>
   </div>
 </template>
@@ -24,18 +28,9 @@ export default {
   },
   methods: {
     getBanner () {
-      getBanner()
-        .then(res => {
-          if (res.code === 1) {
-            this.hotList = res.data.h5_recommend_male_hot_serial
-          } else {
-            alert(res.message)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          alert('网络异常，请稍后重试')
-        })
+      getBanner().then(res => {
+        this.hotList = res.data.h5_recommend_male_hot_serial
+      })
     }
   },
   created () {
@@ -44,7 +39,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .more-fine {
   display: flex;
   flex-direction: column;

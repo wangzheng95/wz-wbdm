@@ -4,10 +4,10 @@
     <div class="cate-list">
       <div
         class="cate-list-item"
-        :class="{ 'active' : item.cate_id === cateIndex }"
+        :class="{ active: item.cate_id === cateIndex }"
         v-for="(item, index) in cateList"
         :key="item.cate_cn_name"
-        @click='handleClick1(item, index)'
+        @click="handleClick1(item, index)"
       >
         {{ item.cate_cn_name }}
       </div>
@@ -17,10 +17,10 @@
         <div class="end_status_list">
           <div
             class="end_status_list_item"
-            :class="{ 'active' : item.end_status === endIndex }"
+            :class="{ active: item.end_status === endIndex }"
             v-for="(item, index) in endList"
             :key="item.end_status_name"
-            @click='handleClick2(item, index)'
+            @click="handleClick2(item, index)"
           >
             {{ item.end_status_name }}
           </div>
@@ -28,10 +28,10 @@
         <div class="pay_status_list">
           <div
             class="pay_status_list_item"
-            :class="{ 'active' : item.comic_pay_status === payIndex }"
+            :class="{ active: item.comic_pay_status === payIndex }"
             v-for="(item, index) in payList"
             :key="item.comiv_pay_status_name"
-            @click='handleClick3(item, index)'
+            @click="handleClick3(item, index)"
           >
             {{ item.comic_pay_status_name }}
           </div>
@@ -83,36 +83,18 @@ export default {
   },
   methods: {
     a () {
-      return getHeader()
-        .then(res => {
-          // console.log(res)
-          if (res.code === 1) {
-            this.cateList = res.data.cate_list
-            this.payList = res.data.comic_pay_status_list
-            this.endList = res.data.end_status_list
-          } else {
-            alert(res.message)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          alert('网络异常，请稍后重试')
-        })
+      return getHeader().then(res => {
+        // console.log(res)
+        this.cateList = res.data.cate_list
+        this.payList = res.data.comic_pay_status_list
+        this.endList = res.data.end_status_list
+      })
     },
     b (cateIndex, payIndex, endIndex) {
-      getBottom(cateIndex, payIndex, endIndex)
-        .then(res => {
-          // console.log(res)
-          if (res.code === 1) {
-            this.cartoonList = res.data.data
-          } else {
-            alert(res.message)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          alert('网络异常，请稍后重试')
-        })
+      getBottom(cateIndex, payIndex, endIndex).then(res => {
+        // console.log(res)
+        this.cartoonList = res.data.data
+      })
     },
     handleClick1 (payload, type, index) {
       this.cateIndex = payload.cate_id

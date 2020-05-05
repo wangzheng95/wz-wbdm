@@ -3,17 +3,25 @@
     <div class="search_header">
       <form method="get" action="javascript:void(0);">
         <div class="search_ferame">
-          <span class="search_ferame_icon"></span
-          ><input placeholder="请输入搜索关键字" /><span
+          <span class="search_ferame_icon"></span>
+          <input
+            placeholder="请输入搜索关键字"
+            v-model="inputVal"
+            @keyup="searchEnter($event)"
+          />
+          <span
             class="search_clear_cion"
-            style="display: none;"
+            v-if="inputVal"
+            @click="clearInput"
           ></span>
         </div>
       </form>
-      <div class="search_fix_btn">
-        <span>取消</span
-        ><!---->
-      </div>
+      <router-link to="/home">
+        <div class="search_fix_btn">
+          <span>取消</span
+          ><!---->
+        </div>
+      </router-link>
     </div>
     <div style="display: none;"><!----></div>
     <div class="search_footer">
@@ -22,67 +30,16 @@
           <div class="hot_serch_header">
             <div class="search_title">热门搜索</div>
             <!-- <div class="search_icon refresh"></div> -->
-            <div class="iconfont icon-qingkong-"></div>
+            <div class="iconfont icon-qingkong-" @click="refresh(num)"></div>
           </div>
           <ul class="hot_search_conent">
-            <li class="search_label">
+            <li
+              class="search_label"
+              v-for="item in hotList"
+              :key="item.object_id + item.title"
+            >
               <a href="/c/71229" class="">
-                爷就是开挂少女
-              </a>
-            </li>
-            <li class="search_label">
-              <a href="/c/71196" class="">
-                初恋AI
-              </a>
-            </li>
-            <li class="search_label">
-              <a href="/c/71197" class="">
-                妖咒录
-              </a>
-            </li>
-            <li class="search_label">
-              <a href="/c/70617" class="">
-                氪命游戏
-              </a>
-            </li>
-            <li class="search_label">
-              <a href="/c/71172" class="">
-                我在武林做微商
-              </a>
-            </li>
-            <li class="search_label">
-              <a href="/c/71173" class="">
-                都市小妖精
-              </a>
-            </li>
-            <li class="search_label">
-              <a href="/c/70992" class="">
-                万能的外卖小哥哥
-              </a>
-            </li>
-            <li class="search_label">
-              <a href="/c/70113" class="">
-                我是小三劝退师
-              </a>
-            </li>
-            <li class="search_label">
-              <a href="/c/68585" class="">
-                人鱼公主
-              </a>
-            </li>
-            <li class="search_label">
-              <a href="/c/68266" class="">
-                天才宝贝的腹黑嫡娘
-              </a>
-            </li>
-            <li class="search_label">
-              <a href="/c/68670" class="">
-                美人老矣
-              </a>
-            </li>
-            <li class="search_label">
-              <a href="/c/71007" class="">
-                倾世帝王姬
+                {{ item.title }}
               </a>
             </li>
           </ul>
@@ -91,17 +48,15 @@
       <div class="hot_search hosity">
         <div class="hot_serch_header">
           <div class="search_title">搜索历史</div>
-          <div class="iconfont icon-qingkong "></div>
+          <div class="iconfont icon-qingkong" @click="clearHistory"></div>
         </div>
         <ul class="hot_search_conent">
-          <li class="search_label">
-            <span class="search_label_text">你</span>
-          </li>
-          <li class="search_label">
-            <span class="search_label_text">wo</span>
-          </li>
-          <li class="search_label">
-            <span class="search_label_text">sss</span>
+          <li
+            class="search_label"
+            v-for="item in historySearchList"
+            :key="item"
+          >
+            <span class="search_label_text">{{ item }}</span>
           </li>
         </ul>
       </div>
@@ -111,8 +66,97 @@
 </template>
 
 <script>
+import { getSearch, getWord } from '@/api/search'
 export default {
-  name: 'search'
+  name: 'search',
+  data () {
+    return {
+      hotList: [],
+      num: 0,
+      inputVal: '',
+      historySearchList: this.getIndex(),
+      searchList: []
+    }
+  },
+  methods: {
+    getSearch (n) {
+      return getSearch(n)
+        .then(res => {
+          if (res.code === 1) {
+            // console.log(res.data)
+            this.hotList = res.data.slice(n * 9, (n + 1) * 9)
+            // console.log(this.hotList)
+          } else {
+            alert(res.message)
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          alert('网络异常，请稍后重试')
+        })
+    },
+    getWord (inputVal) {
+      return getWord(inputVal).then(res => {
+        // console.log(res.data)
+      })
+    },
+    refresh (num) {
+      num = num + 1
+      this.getSearch(num)
+      this.num = num + 1
+      if (this.num > 5) {
+        this.num = 0
+      }
+    },
+    // 清空输入框
+    clearInput () {
+      this.inputVal = ''
+    },
+    // searchEnter
+    searchEnter (keyCode) {
+      if (event.keyCode === 13) {
+        if (this.inputVal === '') {
+          alert('搜索内容为空')
+        } else {
+          this.saveIndex(this.inputVal)
+        }
+      }
+    },
+    //  保存最近搜索
+    saveIndex (inputVal) {
+      // 1. 取出之前存的内容
+      let tmp = window.localStorage.getItem('search')
+      // 2. 判断tmp是否存在
+      if (!tmp) {
+        tmp = []
+      } else {
+        tmp = JSON.parse(tmp)
+      }
+      // 3. 判断 keyword 是否已经在 tmp 中存在
+      if (tmp.includes(inputVal)) {
+        return
+      }
+      // 4. 将 keyword 追加到 tmp 数组中
+      tmp.push(inputVal)
+      // 5. 再将 tmp 存储
+      window.localStorage.setItem('search', JSON.stringify(tmp))
+    },
+    // 取出最近搜索
+    getIndex () {
+      const tmp = window.localStorage.getItem('search')
+      if (!tmp) {
+        return []
+      } else {
+        return JSON.parse(tmp)
+      }
+    },
+    clearHistory () {
+      window.localStorage.search = []
+    }
+  },
+  created () {
+    this.getSearch(0)
+  }
 }
 </script>
 

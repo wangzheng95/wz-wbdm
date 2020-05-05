@@ -1,10 +1,14 @@
 <template>
   <div class="page-end">
-     <normalHeader :title='"完结"'></normalHeader>
-     <div class="main">
-        <endList v-for='item in endCartoon' :key='item.info_id' :info='item'></endList>
-     </div>
-     <!--  v-for='item in endCartoon' :key='item.info_id' -->
+    <normalHeader :title="'完结'"></normalHeader>
+    <div class="main">
+      <endList
+        v-for="item in endCartoon"
+        :key="item.info_id"
+        :info="item"
+      ></endList>
+    </div>
+    <!--  v-for='item in endCartoon' :key='item.info_id' -->
   </div>
 </template>
 
@@ -25,20 +29,11 @@ export default {
   },
   methods: {
     a () {
-      return getEnd()
-        .then(res => {
-          // console.log(res)
-          if (res.code === 1) {
-            // console.log(res)
-            this.endCartoon = res.data.ending_works_list
-          } else {
-            alert(res.message)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          alert('网络异常，请稍后重试')
-        })
+      return getEnd().then(res => {
+        // console.log(res)
+        // console.log(res)
+        this.endCartoon = res.data.ending_works_list
+      })
     }
   },
   created () {
@@ -47,7 +42,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .page-end {
   display: flex;
   flex-direction: column;

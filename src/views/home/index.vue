@@ -10,7 +10,9 @@
       </div>
       <div class="nav_right">
         <div class="nav_switch_gender male_btn"></div>
-        <div class="nav_search iconfont icon-search"></div>
+        <router-link to='/search'>
+          <div class="nav_search iconfont icon-search"></div>
+        </router-link>
         <div class="nav_mine iconfont icon-gerenzhongxin"></div>
       </div>
     </div>
@@ -38,7 +40,7 @@
         <div class="home-recommend-block">
           <div class="home-recommend-header">
             <div class="home-recommend-title">精品佳作</div>
-            <router-link to='/fine'>
+            <router-link to="/fine">
               <div class="home-recommend-more">更多&gt;</div>
             </router-link>
           </div>
@@ -68,7 +70,7 @@
         <div class="home-recommend-block">
           <div class="home-recommend-header">
             <div class="home-recommend-title">人气作品</div>
-            <router-link to='/popular'>
+            <router-link to="/popular">
               <div class="home-recommend-more">更多&gt;</div>
             </router-link>
           </div>
@@ -99,7 +101,7 @@
         <div class="home-recommend-block2">
           <div class="home-recommend-header">
             <div class="home-recommend-title">最新上架</div>
-            <router-link to='/newA'>
+            <router-link to="/newA">
               <div class="home-recommend-more">更多&gt;</div>
             </router-link>
           </div>
@@ -137,7 +139,7 @@
         <div class="home-recommend-block">
           <div class="home-recommend-header">
             <div class="home-recommend-title">热门连载</div>
-            <router-link to='/hot'>
+            <router-link to="/hot">
               <div class="home-recommend-more">更多&gt;</div>
             </router-link>
           </div>
@@ -168,7 +170,7 @@
         <div class="home-recommend-block">
           <div class="home-recommend-header">
             <div class="home-recommend-title">小编推荐</div>
-            <router-link to='/xiaobian'>
+            <router-link to="/xiaobian">
               <div class="home-recommend-more">更多&gt;</div>
             </router-link>
           </div>
@@ -199,7 +201,7 @@
         <div class="home-recommend-block3">
           <div class="home-recommend-header">
             <div class="home-recommend-title">本周推荐</div>
-            <router-link to='/week'>
+            <router-link to="/week">
               <div class="home-recommend-more">更多&gt;</div>
             </router-link>
           </div>
@@ -255,39 +257,24 @@ export default {
   },
   methods: {
     getBanner () {
-      getBanner()
-        .then(res => {
-          if (res.code === 1) {
-            this.bannerList = res.data.h5_recommend_male_rotation_map
-            this.fineWorksLit = res.data.h5_recommend_male_fine_works.splice(
-              0,
-              3
-            )
-            this.popularList = res.data.h5_recommend_male_popular_works.splice(
-              0,
-              4
-            )
-            this.newArrivalList = res.data.h5_recommend_male_new_arrival.splice(
-              0,
-              3
-            )
-            this.hotList = res.data.h5_recommend_male_hot_serial.splice(0, 2)
-            this.xiaobianList = res.data.h5_recommend_male_xiaobian_recommend.splice(
-              0,
-              3
-            )
-            this.weekList = res.data.h5_recommend_male_week_recommend.splice(
-              0,
-              3
-            )
-          } else {
-            alert(res.message)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          alert('网络异常，请稍后重试')
-        })
+      getBanner().then(res => {
+        this.bannerList = res.data.h5_recommend_male_rotation_map
+        this.fineWorksLit = res.data.h5_recommend_male_fine_works.splice(0, 3)
+        this.popularList = res.data.h5_recommend_male_popular_works.splice(
+          0,
+          4
+        )
+        this.newArrivalList = res.data.h5_recommend_male_new_arrival.splice(
+          0,
+          3
+        )
+        this.hotList = res.data.h5_recommend_male_hot_serial.splice(0, 2)
+        this.xiaobianList = res.data.h5_recommend_male_xiaobian_recommend.splice(
+          0,
+          3
+        )
+        this.weekList = res.data.h5_recommend_male_week_recommend.splice(0, 3)
+      })
     }
   },
   created () {

@@ -2,7 +2,7 @@
 import request from '@/utils/request'
 export const getEnd = () => {
   return request({
-    url: '/wbdmwbcomic/home/recommend_list?location_en=ending_works_list&_type=h5',
+    url: '/wbdm/wbcomic/home/recommend_list?location_en=ending_works_list&_type=h5',
     methods: 'GET'
   })
 }
